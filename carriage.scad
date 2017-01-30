@@ -44,12 +44,13 @@ module carriage() {
 		}
 	}
 
-	//translate([-7,horn_y-4,horn_thickness/2])
-	//	cube([14,8,belt_z+belt_width]);
-	//for(s=[1,-1]) scale([s,1,1])
-	//translate([-7-m3_nut_h,horn_y,horn_thickness/2])
-	//rotate([0,90,0]) 	rotate([0,0,30])
-	//	cylinder(r=m3_nut_w/2*1.154734411, h=m3_nut_h+7.1, $fn=6);
+    // Locking Nut Channel
+	translate([-7,horn_y-4,horn_thickness/2])
+		cube([14,8,belt_z+belt_width]);
+	for(s=[1,-1]) scale([s,1,1])
+	translate([-7-m3_nut_h,horn_y,horn_thickness/2])
+	rotate([0,90,0]) 	rotate([0,0,30])
+		cylinder(r=m3_nut_w/2*1.154734411, h=m3_nut_h+7.1, $fn=6);
 
 	translate([belt_x-belt_thickness/2, -height/2, belt_z])
 		cube([belt_thickness, height, belt_width]);
@@ -65,12 +66,23 @@ module carriage() {
 	rotate([0,90,0])
 		cylinder(r=2, h=separation+1, center=true,$fn=24);
 
+    // Mounting Holes
 	for(a=[0,180]) rotate([0,0,a]) {
 	translate([width/4-1.2,height/2-4.5,-4]) 
 		cylinder(r=m3_radius,h=20,$fn=24);
 	translate([width/4-1.2,height/2-4.5,6]) 
 		cylinder(r=3.2,h=belt_width+belt_z+3,$fn=48);
 	}
+    
+    
+    //Z Axis Screw
+	translate([-3.2,33,0])
+	rotate([0,90,90])
+		cylinder(r=m3_radius, h=40, center=true,$fn=24);
+	translate([-3.2,33,0])
+	rotate([0,90,90])    
+		cylinder(r=3.2, h=4, center=true,$fn=24);
+	
 
 
 	}
