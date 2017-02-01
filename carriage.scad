@@ -25,14 +25,17 @@ module carriage() {
       for (x = [-1, 1]) {
         scale([x, 1, 1]) intersection() {
           translate([0, 0, horn_thickness/2+1])
+            // Enclosing cube
             cube([separation, height, horn_thickness+10], center=true);
           translate([horn_x, horn_y, horn_thickness/2]) rotate([0, 90, 0])
-            cylinder(r1=14, r2=3.4, h=separation/2-horn_x);
+            # cylinder(r1=14, r2=3.4, h=separation/2-horn_x);
         }
       }
 
+      // Main Body
       translate([-width/2, -height/2, -4])
 			cube([width, height-6, thickness]);
+      // Body Top
       translate([-horn_x, horn_y+4, -4])
 			cube([horn_x*2, height/2-horn_y-4, thickness]);
 
@@ -46,15 +49,17 @@ module carriage() {
 
     // Locking Nut Channel
 	translate([-7,horn_y-4,horn_thickness/2])
-		cube([14,8,belt_z+belt_width]);
+		#cube([14,8,belt_z+belt_width]);
 	for(s=[1,-1]) scale([s,1,1])
 	translate([-7-m3_nut_h,horn_y,horn_thickness/2])
 	rotate([0,90,0]) 	rotate([0,0,30])
 		cylinder(r=m3_nut_w/2*1.154734411, h=m3_nut_h+7.1, $fn=6);
 
+    // Belt Guide
 	translate([belt_x-belt_thickness/2, -height/2, belt_z])
 		cube([belt_thickness, height, belt_width]);
 
+    // Teeth
 	for(y=[-height/2:2:horn_y]) {
 		translate([belt_x-belt_thickness/2-1.0, y, belt_z])
 			cube([1.1,1.25,belt_width+2]);
@@ -62,6 +67,7 @@ module carriage() {
 	translate([belt_x, 0, belt_z+belt_width])
 	rotate([0,45,0]) cube([belt_thickness*1.7,height,belt_thickness*1.7], center=true);
 
+    // Arm Mounting Holes
 	translate([0,horn_y,horn_thickness/2])
 	rotate([0,90,0])
 		cylinder(r=2, h=separation+1, center=true,$fn=24);
@@ -76,12 +82,12 @@ module carriage() {
     
     
     //Z Axis Screw
-	translate([-3.2,33,0])
+	translate([-3.2,31,0])
 	rotate([0,90,90])
-		cylinder(r=m3_radius, h=40, center=true,$fn=24);
+		# cylinder(r=2.7/2, h=9, center=true,$fn=24);
 	translate([-3.2,33,0])
 	rotate([0,90,90])    
-		cylinder(r=3.2, h=4, center=true,$fn=24);
+		# cylinder(r=3.2, h=4, center=true,$fn=24);
 	
 
 
